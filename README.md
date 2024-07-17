@@ -45,38 +45,32 @@ limitations under the License.
 
 <!-- Package usage documentation. -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/complex-float32-base-assert-is-same-value
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
-To use in Observable,
-
 ```javascript
-isSameValuef = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-assert-is-same-value@umd/browser.js' )
-```
-
-To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
-
-```javascript
-var isSameValuef = require( 'path/to/vendor/umd/complex-float32-base-assert-is-same-value/index.js' )
-```
-
-To include the bundle in a webpage,
-
-```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-assert-is-same-value@umd/browser.js"></script>
-```
-
-If no recognized module system is present, access bundle contents via the global scope:
-
-```html
-<script type="text/javascript">
-(function () {
-    window.isSameValuef;
-})();
-</script>
+var isSameValuef = require( '@stdlib/complex-float32-base-assert-is-same-value' );
 ```
 
 #### isSameValuef( z1, z2 )
@@ -135,14 +129,9 @@ out = isSameValuef( z1, z2 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-ctor@umd/browser.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/complex-float32-base-assert-is-same-value@umd/browser.js"></script>
-<script type="text/javascript">
-(function () {
+```javascript
+var Complex64 = require( '@stdlib/complex-float32-ctor' );
+var isSameValuef = require( '@stdlib/complex-float32-base-assert-is-same-value' );
 
 var z1 = new Complex64( 5.0, 3.0 );
 var z2 = new Complex64( 5.0, 3.0 );
@@ -158,11 +147,6 @@ z1 = new Complex64( NaN, 3.0 );
 z2 = new Complex64( NaN, 3.0 );
 out = isSameValuef( z1, z2 );
 // returns true
-
-})();
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -171,7 +155,101 @@ out = isSameValuef( z1, z2 );
 
 <!-- C interface documentation. -->
 
+* * *
 
+<section class="c">
+
+## C APIs
+
+<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
+
+<section class="intro">
+
+</section>
+
+<!-- /.intro -->
+
+<!-- C usage documentation. -->
+
+<section class="usage">
+
+### Usage
+
+```c
+#include "stdlib/complex/float32/base/assert/is_same_value.h"
+```
+
+#### stdlib_base_complex64_is_same_value( z1, z2 )
+
+Tests whether two single-precision complex floating-point numbers are the same value.
+
+```c
+#include "stdlib/complex/float32/ctor.h"
+#include <stdbool.h>
+
+stdlib_complex64_t z1 = stdlib_complex64( 5.0f, 2.0f );
+stdlib_complex64_t z2 = stdlib_complex64( 5.0f, 2.0f );
+
+bool v = stdlib_base_complex64_is_same_value( z1, z2 );
+```
+
+The function accepts the following arguments:
+
+-   **z1**: `[in] stdlib_complex64_t` first single-precision complex floating-point number.
+-   **z2**: `[in] stdlib_complex64_t` second single-precision complex floating-point number.
+
+```c
+bool stdlib_base_complex64_is_same_value( const stdlib_complex64_t z1, const stdlib_complex64_t z2 );
+```
+
+</section>
+
+<!-- /.usage -->
+
+<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
+
+<section class="notes">
+
+</section>
+
+<!-- /.notes -->
+
+<!-- C API usage examples. -->
+
+<section class="examples">
+
+### Examples
+
+```c
+#include "stdlib/complex/float32/base/assert/is_same_value.h"
+#include "stdlib/complex/float32/ctor.h"
+#include <stdbool.h>
+#include <stdio.h>
+
+int main( void ) {
+    const stdlib_complex64_t z[] = {
+        stdlib_complex64( 5.0f, 2.0f ),
+        stdlib_complex64( -2.0f, 1.0f ),
+        stdlib_complex64( 0.0f, -0.0f ),
+        stdlib_complex64( 0.0f/0.0f, 0.0f/0.0f )
+    };
+
+    bool v;
+    int i;
+    for ( i = 0; i < 4; i++ ) {
+        v = stdlib_base_complex64_is_same_value( z[ i ], z[ i ] );
+        printf( "Same value? %s\n", ( v ) ? "True" : "False" );
+    }
+}
+```
+
+</section>
+
+<!-- /.examples -->
+
+</section>
+
+<!-- /.c -->
 
 <!-- Section to include cited references. If references are included, add a horizontal rule *before* the section. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
 
@@ -208,6 +286,11 @@ For more information on the project, filing bug reports and feature requests, an
 
 ---
 
+## License
+
+See [LICENSE][stdlib-license].
+
+
 ## Copyright
 
 Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
@@ -223,8 +306,8 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 [npm-image]: http://img.shields.io/npm/v/@stdlib/complex-float32-base-assert-is-same-value.svg
 [npm-url]: https://npmjs.org/package/@stdlib/complex-float32-base-assert-is-same-value
 
-[test-image]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/actions/workflows/test.yml/badge.svg?branch=main
-[test-url]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/actions/workflows/test.yml?query=branch:main
+[test-image]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/actions/workflows/test.yml/badge.svg?branch=v0.1.0
+[test-url]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/actions/workflows/test.yml?query=branch:v0.1.0
 
 [coverage-image]: https://img.shields.io/codecov/c/github/stdlib-js/complex-float32-base-assert-is-same-value/main.svg
 [coverage-url]: https://codecov.io/github/stdlib-js/complex-float32-base-assert-is-same-value?branch=main
@@ -253,6 +336,8 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 [esm-url]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/tree/esm
 [esm-readme]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/blob/esm/README.md
 [branches-url]: https://github.com/stdlib-js/complex-float32-base-assert-is-same-value/blob/main/branches.md
+
+[stdlib-license]: https://raw.githubusercontent.com/stdlib-js/complex-float32-base-assert-is-same-value/main/LICENSE
 
 [ecma-262-same-value-algorithm]: http://ecma-international.org/ecma-262/5.1/#sec-9.12
 
